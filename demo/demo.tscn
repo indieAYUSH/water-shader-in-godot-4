@@ -1,17 +1,17 @@
 [gd_scene format=4 uid="uid://cj0vblntytbtu"]
 
 [ext_resource type="Shader" uid="uid://bci1uvklx27yu" path="res://shader/godot_water.gdshader" id="1_d6po2"]
+[ext_resource type="Texture2D" uid="uid://dgltbopj0jnc5" path="res://kloofendal_48d_partly_cloudy_puresky_1k.exr" id="1_ytiva"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ytiva"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pvxpe"]
+panorama = ExtResource("1_ytiva")
 
-[sub_resource type="Sky" id="Sky_dar0o"]
-sky_material = SubResource("ProceduralSkyMaterial_ytiva")
+[sub_resource type="Sky" id="Sky_1wljh"]
+sky_material = SubResource("PanoramaSkyMaterial_pvxpe")
 
 [sub_resource type="Environment" id="Environment_j5lb4"]
 background_mode = 2
-sky = SubResource("Sky_dar0o")
+sky = SubResource("Sky_1wljh")
 tonemap_mode = 4
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ke0tx"]
@@ -47,7 +47,6 @@ shader_parameter/albedo = Color(9.866804e-07, 0.31901717, 0.42183965, 1)
 shader_parameter/fernsal_rim = Color(5.0055983e-06, 0.53803915, 0.7269746, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.0
-shader_parameter/alpha = 0.999999977648
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_tobig")
 shader_parameter/texture_normal1 = SubResource("NoiseTexture2D_8pm3k")
 shader_parameter/wave_dir = Vector2(2, 0)
@@ -55,19 +54,20 @@ shader_parameter/wave_dir1 = Vector2(0, 1)
 shader_parameter/time_scale = 0.0400000019
 shader_parameter/wave_noise = SubResource("NoiseTexture2D_hb8eq")
 shader_parameter/noise_scale = 10.0
-shader_parameter/height_scale = 0.15
-shader_parameter/shallow_color = Color(1.540184e-06, 0.5040832, 0.6571831, 1)
+shader_parameter/height_scale = 0.255
+shader_parameter/shallow_color = Color(1.2032688e-06, 0.5094341, 0.5383702, 1)
 shader_parameter/deep_color = Color(1.2032688e-08, 0.24980032, 0.2648856, 1)
 shader_parameter/beers_cofficient = 2.0
 shader_parameter/depth_offset = -0.75
-shader_parameter/edge_scale = 0.35
+shader_parameter/edge_scale = 0.37
+shader_parameter/edge_softness = 0.065
 shader_parameter/near = 1.0
 shader_parameter/far = 100.0
-shader_parameter/edge_color = Color(6.497651e-07, 0.21241352, 0.2869856, 1)
+shader_parameter/edge_color = Color(0, 0.40392157, 0.42352942, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_1wljh"]
 material = SubResource("ShaderMaterial_pvxpe")
-size = Vector2(8, 8)
+size = Vector2(9, 9)
 subdivide_width = 100
 subdivide_depth = 100
 orientation = 1
@@ -84,6 +84,7 @@ _surfaces = [{
 }]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1wljh"]
+height = 1.5039063
 
 [node name="demo" type="Node3D" unique_id=2071590794]
 
@@ -91,7 +92,7 @@ _surfaces = [{
 environment = SubResource("Environment_j5lb4")
 
 [node name="water" type="MeshInstance3D" parent="." unique_id=1840367412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012657642, 0.13379681, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012657642, 0.068948865, 0)
 mesh = SubResource("QuadMesh_1wljh")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1853412743]
@@ -99,5 +100,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9188995, 0)
 mesh = SubResource("ArrayMesh_d6po2")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1884811972]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5136932, -0.7227006, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5136932, -0.18635511, 0)
 mesh = SubResource("CapsuleMesh_1wljh")
