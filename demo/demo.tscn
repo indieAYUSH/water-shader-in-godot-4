@@ -1,3 +1,104 @@
-[gd_scene format=3 uid="uid://cj0vblntytbtu"]
+[gd_scene format=4 uid="uid://cj0vblntytbtu"]
+
+[ext_resource type="Shader" uid="uid://bci1uvklx27yu" path="res://shader/godot_water.gdshader" id="1_d6po2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ytiva"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dar0o"]
+sky_material = SubResource("ProceduralSkyMaterial_ytiva")
+
+[sub_resource type="Environment" id="Environment_j5lb4"]
+background_mode = 2
+sky = SubResource("Sky_dar0o")
+tonemap_mode = 4
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ke0tx"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tobig"]
+noise = SubResource("FastNoiseLite_ke0tx")
+seamless = true
+as_normal_map = true
+bump_strength = 5.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ln7fe"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8pm3k"]
+noise = SubResource("FastNoiseLite_ln7fe")
+seamless = true
+as_normal_map = true
+bump_strength = 5.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xmolq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hb8eq"]
+noise = SubResource("FastNoiseLite_xmolq")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvxpe"]
+render_priority = 0
+shader = ExtResource("1_d6po2")
+shader_parameter/albedo = Color(9.866804e-07, 0.31901717, 0.42183965, 1)
+shader_parameter/fernsal_rim = Color(5.0055983e-06, 0.53803915, 0.7269746, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/alpha = 0.999999977648
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_tobig")
+shader_parameter/texture_normal1 = SubResource("NoiseTexture2D_8pm3k")
+shader_parameter/wave_dir = Vector2(-0.385, 0)
+shader_parameter/wave_dir1 = Vector2(0, 1)
+shader_parameter/time_scale = 0.0400000019
+shader_parameter/wave_noise = SubResource("NoiseTexture2D_hb8eq")
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/shallow_color = Color(1.4439226e-07, 0.44043228, 0.5811595, 1)
+shader_parameter/deep_color = Color(1.1431053e-07, 0.17305431, 0.18417549, 1)
+shader_parameter/beers_cofficient = 0.78
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.49
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(2.5027991e-06, 0.3703283, 0.49378592, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1wljh"]
+material = SubResource("ShaderMaterial_pvxpe")
+size = Vector2(8, 8)
+subdivide_width = 100
+subdivide_depth = 100
+orientation = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d6po2"]
+_surfaces = [{
+"aabb": AABB(-5, -5.2547607, -5, 10, 10.5095215, 10),
+"attribute_data": PackedByteArray("AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD9mZmY/ZmZmPwAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAGZmZj9mZmY/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD9mZmY/ZmZmP83MzD1mZmY/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD/NzMw9ZmZmP83MzD3NzMw9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAABmZmY/zczMPWZmZj9mZmY/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAADNzMw9zczMPWZmZj/NzMw9AAAAAAAAgD/NzMw9zczMPQAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAM3MzD3NzMw9AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAAAAAAIA/AACAP0a2Oj4AAAAAAACAPwAAAAAAAIA/blJRPwAAAABuUlE/AACAPwAAgD9Gtjo+AACAP0a2Oj4AAAAAAACAPwAAgD8AAAAAAACAPwAAgD9Gtjo+AAAAAAAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAblJRPwAAAAAAAAAAAACAPwAAgD9Gtjo+AACAP0a2Oj4AAAAAAAAAAAAAgD8AAAAARrY6PgAAgD9Gtjo+AACAPwAAgD9Gtjo+AAAAAAAAgD8AAAAA"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("AACgwAAnqMAAAKDAAACgwAAnqEAAAKDAAACgwAAnqMAAAKBAAACgwAAnqMAAAKDAAACgwAAnqMAAAKBAAACgQAAnqMAAAKDAAACgwAAnqMAAAKDAAACgQAAnqMAAAKDAAACgwAAnqEAAAKDAAACgwAAnqEAAAKDAAACAwAAnqEAAAIDAAACgwAAnqEAAAKBAAACgwAAnqEAAAKDAAACgQAAnqEAAAKDAAACAwAAnqEAAAIDAAACgwAAnqMAAAKBAAACgwAAnqEAAAKDAAACgwAAnqEAAAKBAAACgwAAnqEAAAKBAAACAwAAnqEAAAIDAAACAwAAnqEAAAIBAAACgwAAnqMAAAKBAAACgwAAnqEAAAKBAAACgQAAnqEAAAKBAAACgwAAnqEAAAKBAAACAwAAnqEAAAIBAAACAQAAnqEAAAIBAAACgwAAnqMAAAKBAAACgQAAnqMAAAKBAAACgQAAnqMAAAKDAAACgwAAnqMAAAKBAAACgQAAnqEAAAKBAAACgQAAnqMAAAKBAAACgQAAnqMAAAKDAAACgQAAnqMAAAKBAAACgQAAnqEAAAKBAAACgwAAnqEAAAKDAAACgQAAnqMAAAKDAAACgQAAnqEAAAKDAAACgQAAnqEAAAKDAAACAQAAnqEAAAIDAAACAwAAnqEAAAIDAAACgQAAnqMAAAKDAAACgQAAnqEAAAKBAAACgQAAnqEAAAKDAAACgQAAnqEAAAKDAAACAQAAnqEAAAIBAAACAQAAnqEAAAIDAAACgwAAnqEAAAKBAAACAQAAnqEAAAIBAAACgQAAnqEAAAKBAAACgQAAnqEAAAKDAAACgQAAnqEAAAKBAAACAQAAnqEAAAIBAAACAwACQtr4AAIDAAACAQACQtr4AAIDAAACAwACQtr4AAIBAAACAwACQtr4AAIDAAACAwACQtr4AAIBAAACAwAAnqEAAAIDAAACAwACQtr4AAIDAAACAwAAnqEAAAIDAAACAQAAnqEAAAIDAAACAwACQtr4AAIBAAACAwAAnqEAAAIBAAACAwAAnqEAAAIDAAACAwACQtr4AAIBAAACAQACQtr4AAIBAAACAwAAnqEAAAIBAAACAwACQtr4AAIBAAACAQACQtr4AAIDAAACAQACQtr4AAIBAAACAwACQtr4AAIDAAACAQAAnqEAAAIDAAACAQACQtr4AAIDAAACAQACQtr4AAIDAAACAQAAnqEAAAIDAAACAQAAnqEAAAIBAAACAQACQtr4AAIBAAACAQAAnqEAAAIBAAACAwAAnqEAAAIBAAACAQACQtr4AAIDAAACAQAAnqEAAAIBAAACAQACQtr4AAIBAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9///8AAAAA/3//////AAD/f///AAAAAP9//////wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3///wAAAAD/f/////8AAP9///8AAAAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3///wAAAAD/f///AAAAAP9///8AAAAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3///wAAAAD/f///AAAAAP9//////wAA////f/9//n////9//3/+f////3//f/5//3///wAAAAD/f///AAAAAP9///8AAAAA/3///wAAAAD/f///AAAAAP9//////wAA/3///wAAAAD/f/////8AAP9///8AAAAA/3//////////f/////////9/////////////f/9/AID///9//38AgP///3//fwCA/3//fwAA/7//f/9/AAD/v/9//38AAP+/////f/9/AID///9//38AgP///3//fwCA/////wAA/7//////AAD/v/////8AAP+//3//////////f/////////9//////////3//fwAA/7//f/9/AAD/v/9//38AAP+/AAD/f/9/AIAAAP9//38AgAAA/3//fwCA/////wAA/7//////AAD/v/////8AAP+/AAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
+}]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1wljh"]
 
 [node name="demo" type="Node3D" unique_id=2071590794]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2014359288]
+environment = SubResource("Environment_j5lb4")
+
+[node name="water" type="MeshInstance3D" parent="." unique_id=1840367412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012657642, 0.26263726, 0)
+mesh = SubResource("QuadMesh_1wljh")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1853412743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9188995, 0)
+mesh = SubResource("ArrayMesh_d6po2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1884811972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5952083, 0)
+mesh = SubResource("CapsuleMesh_1wljh")
