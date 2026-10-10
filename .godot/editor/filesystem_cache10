@@ -1,7 +1,8 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1791627018
+::res://::1791638469
 icon.svg::CompressedTexture2D::1790880795757653::1791564883::1791569356::1::::<><><>0<>0<>1d558fff71561543e2cf7e0d300c3350<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-::res://demo/::1791570401
-demo.tscn::PackedScene::5457427845357391318::1791570401::0::1::::<><><>0<>0<><>::uid://bci1uvklx27yu::::res://shader/godot_water.gdshader
-::res://shader/::1791570393
-godot_water.gdshader::Shader::2544928869661691628::1791570393::0::1::::<><><>0<>0<><>::
+kloofendal_48d_partly_cloudy_puresky_1k.exr::CompressedTexture2D::7604259435800287054::1791638465::1791638483::1::::<><><>0<>0<>c11c6015be708f12d3f24daba1b2c34c<>res://.godot/imported/kloofendal_48d_partly_cloudy_puresky_1k.exr-99a8cbe5380c018bfae3e7a0a1de02a8.bptc.ctex::
+::res://demo/::1791638229
+demo.tscn::PackedScene::5457427845357391318::1791638229::0::1::::<><><>0<>0<><>::uid://bci1uvklx27yu::::res://shader/godot_water.gdshader
+::res://shader/::1791638469
+godot_water.gdshader::Shader::2544928869661691628::1791638229::0::1::::<><><>0<>0<><>::

@@ -51,10 +51,10 @@ void fragment() {
 	float depth = PROJECTION_MATRIX[3][2] / (depth_tex + PROJECTION_MATRIX[2][2]);
 	float depth_blend = exp((depth + VERTEX.z + depth_offset ) * -beers_cofficient);
 	depth_blend = clamp(1.0 - depth_blend , 0.0 , 1.0);
-	float depth_blend_power = clamp(pow(1.0 - depth_blend , 2.5) , 0.0 , 1.0);
+	float depth_blend_power = clamp(pow(depth_blend , 2.5) , 0.0 , 1.0);
 	vec3 screen_color = textureLod(SCREEN_TEXTURE , SCREEN_UV , depth_blend_power*2.5).rgb;
 	vec3 depth_color = mix(shallow_color.rgb , deep_color.rgb , depth_blend_power);
-	vec3 color = mix(depth_color * screen_color , depth_color * 0.25 , depth_blend_power*0.5);
+	vec3 color = mix( screen_color  * depth_color, depth_color * 0.25 , depth_blend_power*0.5);
 	
 	float z_depth = edge(texture(DEPTH_TEXTURE , SCREEN_UV).x);
 	float z_pos = edge(FRAGCOORD.z);
