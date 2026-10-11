@@ -1,9 +1,11 @@
 shader_type spatial;
+render_mode cull_disabled;
 
 uniform vec3 albedo : source_color;
 uniform vec3 fernsal_rim : source_color;
 uniform float metallic : hint_range(0.0, 1.0, 0.1) = 0.0;
-uniform float roughness : hint_range(0.0, 1.0, 0.01) = 0.2;
+uniform float roughness : hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform float under_density = 0.1;
 uniform sampler2D texture_normal;
 uniform sampler2D texture_normal1;
 uniform vec2 wave_dir = vec2(2.0,0.0);
@@ -52,7 +54,7 @@ void fragment() {
 	vec2 offset2 = (TIME*wave_dir1)*time_scale;
 	vec3 normal_blend = mix(texture(texture_normal , word_pos.xz+offset1).rgb , texture(texture_normal1 , word_pos.xz+offset2).rgb , 0.5);
 	
-	vec2 _uv = SCREEN_UV + (normal_blend.xy * 2.0 - 1.0) * 0.05;
+	vec2 _uv = SCREEN_UV + (normal_blend.xy * 2.0 - 1.0) * 0.0;
 	
 	float depth_tex = texture(DEPTH_TEXTURE , SCREEN_UV).r;
 	float depth = PROJECTION_MATRIX[3][2] / (depth_tex + PROJECTION_MATRIX[2][2]);
@@ -63,9 +65,8 @@ void fragment() {
 	vec3 depth_color = mix(shallow_color.rgb , deep_color.rgb , depth_blend_power);
 	vec3 color = mix( screen_color  * depth_color, depth_color * 0.5 , depth_blend_power);
 	
-	float z_depth = edge(texture(DEPTH_TEXTURE , SCREEN_UV).x);
-	float z_pos = edge(FRAGCOORD.z);
-	float z_differ = z_depth - z_pos;
+	
+	float z_differ = depth + VERTEX.z;
 	
 	vec3 final_col = mix(edge_color.rgb , color , smoothstep(edge_scale, edge_scale + edge_softness, z_differ));
 	
@@ -74,7 +75,18 @@ void fragment() {
 	vec3 V = normalize(VIEW);
 	float _fresnel = fresnel(5.5 , N , V);
 	vec3 source_albedo = mix(albedo , fernsal_rim , _fresnel);
-	ALBEDO = clamp(source_albedo + final_col , vec3(0.0) , vec3(1.0));
+	if (FRONT_FACING) {
+		
+		ALBEDO = clamp(source_albedo + final_col, vec3(0.0), vec3(1.0));
+	} 
+	else {
+		float cam_depth = max(word_pos.y - CAMERA_POSITION_WORLD.y, 0.0);
+		float under_blend = 1.0 - exp(-cam_depth * under_density);
+
+		vec3 above = textureLod(SCREEN_TEXTURE, _uv, 1.0).rgb;   // sky and anything above
+		vec3 tinted = above * shallow_color.rgb;
+		ALBEDO = mix(tinted, deep_color.rgb * 0.3, under_blend);
+	}
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
 	NORMAL_MAP = normal_blend;

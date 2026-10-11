@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cj0vblntytbtu"]
 
-[ext_resource type="Shader" uid="uid://bci1uvklx27yu" path="res://shader/godot_water.gdshader" id="1_d6po2"]
 [ext_resource type="Texture2D" uid="uid://dgltbopj0jnc5" path="res://kloofendal_48d_partly_cloudy_puresky_1k.exr" id="1_ytiva"]
+[ext_resource type="Material" uid="uid://bv30q66nd5yw6" path="res://demo/demo_water_|material.tres" id="2_ytiva"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pvxpe"]
 panorama = ExtResource("1_ytiva")
@@ -13,70 +13,27 @@ sky_material = SubResource("PanoramaSkyMaterial_pvxpe")
 background_mode = 2
 sky = SubResource("Sky_1wljh")
 tonemap_mode = 4
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ke0tx"]
-noise_type = 3
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tobig"]
-noise = SubResource("FastNoiseLite_ke0tx")
-seamless = true
-as_normal_map = true
-bump_strength = 5.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ln7fe"]
-noise_type = 3
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8pm3k"]
-noise = SubResource("FastNoiseLite_ln7fe")
-seamless = true
-as_normal_map = true
-bump_strength = 5.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xmolq"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hb8eq"]
-noise = SubResource("FastNoiseLite_xmolq")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvxpe"]
-render_priority = 0
-shader = ExtResource("1_d6po2")
-shader_parameter/albedo = Color(9.866804e-07, 0.31901717, 0.42183965, 1)
-shader_parameter/fernsal_rim = Color(5.0055983e-06, 0.53803915, 0.7269746, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.0
-shader_parameter/texture_normal = SubResource("NoiseTexture2D_tobig")
-shader_parameter/texture_normal1 = SubResource("NoiseTexture2D_8pm3k")
-shader_parameter/wave_dir = Vector2(2, 0)
-shader_parameter/wave_dir1 = Vector2(0, 1)
-shader_parameter/time_scale = 0.0400000019
-shader_parameter/wave_noise = SubResource("NoiseTexture2D_hb8eq")
-shader_parameter/noise_scale = 10.0
-shader_parameter/height_scale = 0.255
-shader_parameter/shallow_color = Color(1.2032688e-06, 0.5094341, 0.5383702, 1)
-shader_parameter/deep_color = Color(1.2032688e-08, 0.24980032, 0.2648856, 1)
-shader_parameter/beers_cofficient = 2.0
-shader_parameter/depth_offset = -0.75
-shader_parameter/edge_scale = 0.37
-shader_parameter/edge_softness = 0.065
-shader_parameter/near = 1.0
-shader_parameter/far = 100.0
-shader_parameter/edge_color = Color(0, 0.40392157, 0.42352942, 1)
+sdfgi_use_occlusion = true
+volumetric_fog_density = 0.0
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_1wljh"]
-material = SubResource("ShaderMaterial_pvxpe")
+material = ExtResource("2_ytiva")
 size = Vector2(9, 9)
 subdivide_width = 100
 subdivide_depth = 100
 orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvcqy"]
+roughness = 0.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_d6po2"]
 _surfaces = [{
 "aabb": AABB(-5, -5.2547607, -5, 10, 10.5095215, 10),
 "attribute_data": PackedByteArray("AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD9mZmY/ZmZmPwAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAGZmZj9mZmY/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD9mZmY/ZmZmP83MzD1mZmY/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD/NzMw9ZmZmP83MzD3NzMw9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAABmZmY/zczMPWZmZj9mZmY/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAADNzMw9zczMPWZmZj/NzMw9AAAAAAAAgD/NzMw9zczMPQAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAM3MzD3NzMw9AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAAAAAAIA/AACAP0a2Oj4AAAAAAACAPwAAAAAAAIA/blJRPwAAAABuUlE/AACAPwAAgD9Gtjo+AACAP0a2Oj4AAAAAAACAPwAAgD8AAAAAAACAPwAAgD9Gtjo+AAAAAAAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAblJRPwAAAAAAAAAAAACAPwAAgD9Gtjo+AACAP0a2Oj4AAAAAAAAAAAAAgD8AAAAARrY6PgAAgD9Gtjo+AACAPwAAgD9Gtjo+AAAAAAAAgD8AAAAA"),
 "format": 34359738391,
+"material": SubResource("StandardMaterial3D_bvcqy"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 84,
@@ -92,13 +49,13 @@ height = 1.5039063
 environment = SubResource("Environment_j5lb4")
 
 [node name="water" type="MeshInstance3D" parent="." unique_id=1840367412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012657642, 0.068948865, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38900352, 0.6155193, 0.0011255741)
 mesh = SubResource("QuadMesh_1wljh")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1853412743]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9188995, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3, 0)
 mesh = SubResource("ArrayMesh_d6po2")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1884811972]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5136932, -0.18635511, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6358871, 0.6066594, -0.66392565)
 mesh = SubResource("CapsuleMesh_1wljh")
